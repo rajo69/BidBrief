@@ -1,0 +1,41 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install root dependencies
+        run: |
+          npm install -g turbo
+          npm install
+
+      - name: Install service dependencies
+        run: |
+          pip install -r services/api/requirements.txt
+          pip install -r services/worker/requirements.txt
+
+      - name: Lint TypeScript code
+        run: npm run lint --workspaces --if-present
+
+      - name: Run tests (placeholder)
+        run: npm run test

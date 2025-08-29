@@ -1,0 +1,26 @@
+{
+  "name": "bidbrief",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm --prefix apps/web run dev",
+    "dev:api": "python services/api/main.py",
+    "dev:worker": "python services/worker/main.py",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings=0",
+    "format": "prettier --write .",
+    "build:web": "npm --prefix apps/web run build",
+    "test": "echo \"No tests yet\""
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.4.0",
+    "turbo": "^1.10.12"
+  }
+}
